@@ -1,26 +1,25 @@
+const element = document.getElementById('canvas')
 
-let canvas = document.getElementById("myCanvas");
-let context = canvas.getContext("2d");
+function draw(){
+    
+   const context = element.getContext('2d')
+    
+    context.strokeStyle = 'black'
+    let width = element.width
+    const boardLength = 3;
+    const boardSize = width / boardLength
 
-function drawBoard() {
-	const width = canvas.width;
-	const height = canvas.height;
-
-	let borderLine = 1;
-	let boxRow = 3;
-	let box = width / boxRow
-
-	context.lineWidth = borderLine
-	context.strokeStyle = '#000000'
-
-
-	for (let x = 0; x < width; x += box) {
-		for(let y = 0; y < height; y += box) {
-			context.strokeRect(x, y, box, box)
-		}
-	}
-
+    for(x = 0; x < width; x += boardSize){
+        for(y = 0; y < width; y+= boardSize){
+            context.strokeRect(x, y, boardSize, boardSize)
+            
+            element.addEventListener('mousemove', (event) => {
+                const isPointInStroke = context.isPointInStroke(event.offsetX, event.offsetY)
+                context.strokeStyle = isPointInStroke ? 'red' : ''
+                console.log(event.offsetX, event.offsetY)
+                context.clearRect(x, y, boardSize, boardSize)
+            })
+        }
+    }
 }
 
-
-drawBoard()
