@@ -1,6 +1,7 @@
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
 
+// Rectangle constructor
 function Rectangle (x, y, width, height, color){
 	this.x = x	
 	this.y = y	
@@ -20,6 +21,7 @@ const width = canvas.width
 const boardLength = 3;
 const boardSize = width / boardLength
 
+// Draw board
 for(x = 0; x < width; x += boardSize){
 	for(y = 0; y < width; y+= boardSize){
 		let rectangle = new Rectangle(x, y, boardSize, boardSize, 'black')
