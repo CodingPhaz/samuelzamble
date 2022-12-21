@@ -1,0 +1,6 @@
+Todo of differents task :
+
+() Draw board
+() Add sign on selected board
+() Display winner
+() Display score
