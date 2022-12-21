@@ -1,25 +1,30 @@
-const element = document.getElementById('canvas')
+const canvas = document.getElementById('canvas')
+const context = canvas.getContext('2d')
 
-function draw(){
-    
-   const context = element.getContext('2d')
-    
-    context.strokeStyle = 'black'
-    let width = element.width
-    const boardLength = 3;
-    const boardSize = width / boardLength
+function Rectangle (x, y, width, height, color){
+	this.x = x	
+	this.y = y	
+	this.width = width
+	this.height = height	
+	this.color = color
+	let id = 1
 
-    for(x = 0; x < width; x += boardSize){
-        for(y = 0; y < width; y+= boardSize){
-            context.strokeRect(x, y, boardSize, boardSize)
-            
-            element.addEventListener('mousemove', (event) => {
-                const isPointInStroke = context.isPointInStroke(event.offsetX, event.offsetY)
-                context.strokeStyle = isPointInStroke ? 'red' : ''
-                console.log(event.offsetX, event.offsetY)
-                context.clearRect(x, y, boardSize, boardSize)
-            })
-        }
-    }
+	this.draw = function () {
+		context.strokeStyle = this.color
+		context.strokeRect(this.x, this.y, this.width, this.height)
+		id += 1
+	} 
+}
+
+const width = canvas.width
+const boardLength = 3;
+const boardSize = width / boardLength
+
+for(x = 0; x < width; x += boardSize){
+	for(y = 0; y < width; y+= boardSize){
+		let rectangle = new Rectangle(x, y, boardSize, boardSize, 'black')
+		rectangle.draw()
+		console.log(rectangle.id)
+	}
 }
 
